@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+
+</head>
+<body>
+<div class="ui column doubling stackable grid container">
+    <div class="column">
+        <h1>Dettagli Persona</h1>
+        <div class="ui-list">
+            <div class="item" th:text="'Nome: ' + ${person.getName()}"></div>
+            <div class="item" th:text="'Cognome: ' + ${person.getSurname()}"></div>
+            <div class="item" th:text="'Età: ' + ${person.getAge()}"></div>
+            <div class="item" th:text="'Codice Fiscale: ' + ${person.getFiscalCode()}"></div>
+            <div class="item" th:text="'Email: ' + ${person.getEmail()}"></div>
+            <div class="item" th:text="'Data di Nascita: ' + ${person.getBirthDate()}"></div>
+            <a class="item" href="/persons">Torna a tutte le persone</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

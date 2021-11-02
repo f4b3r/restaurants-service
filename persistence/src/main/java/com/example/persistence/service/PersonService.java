@@ -24,6 +24,10 @@ public class PersonService {
         return  personRepository.findAll();
     }
 
+    public Person getPerson(Long id) {
+        return  personRepository.findById(id).get() ;
+    }
+
     public Person createPerson(AddPersonForm form){
 
         Person person = new Person();

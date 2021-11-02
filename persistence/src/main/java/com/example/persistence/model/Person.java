@@ -1,11 +1,8 @@
 package com.example.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 public class Person {
@@ -26,6 +23,11 @@ public class Person {
     private String email;
 
     private Date birthDate;
+
+    @OneToMany(mappedBy = "person" , cascade = CascadeType.PERSIST)
+    private Set<Restaurant> restaurants = new HashSet<Restaurant>();
+
+
 
     public Long getId() {
         return id;
@@ -81,5 +83,17 @@ public class Person {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public void addRestaurant(Restaurant restaurant)
+    {
+        restaurants.add(restaurant);
+        restaurant.setPerson(this);
+    }
+
+    public void removeRestaurant(Restaurant restaurant)
+    {
+        restaurants.remove(restaurant);
+        restaurant.setPerson(null);
     }
 }

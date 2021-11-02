@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 public class ErrorHandlerController {
 
@@ -18,6 +20,21 @@ public class ErrorHandlerController {
         errorPage.addObject("errorCount", e.getErrorCount());
 
         errorPage.addObject("errorList", e.getAllErrors());
+
+        return errorPage;
+
+
+    }
+
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ModelAndView handleMethodArgumentNotValid(ConstraintViolationException e){
+        ModelAndView errorPage = new ModelAndView("errorCustom");
+
+        errorPage.addObject("errorCount", e.getConstraintViolations().size());
+
+        errorPage.addObject("errorList", e.getConstraintViolations());
 
         return errorPage;
 
