@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+    <title>Aggiungi persona</title>
+</head>
+<body>
+<div class="ui column doubling stackable grid container">
+    <div class="column">
+        <form class="ui form" th:action="@{/persons/add}" method="POST" th:object="${form}">
+            <div class="field">
+                <label for="nome">Nome </label>
+                <input id="nome" type="text" th:field="*{name}" >
+            </div>
+            <div class="field">
+                <label for="surname">Cognome</label>
+                <input id="surname" type="text" th:field="*{surname}" >
+            </div>
+            <div class="field">
+                <label for="age">Eta</label>
+                <input id="age" type="number" th:field="*{age}" >
+            </div>
+            <div class="field">
+                <label for="fiscalCode">Codice Fiscale</label>
+                <input id="fiscalCode" type="text" th:field="*{fiscalCode}" >
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="text" th:field="*{email}" >
+            </div>
+            <div class="field">
+
+
+                <label for="birthDate">Data di nascita</label>
+                <input id="birthDate" type="date" th:field="*{birthDate}" >
+
+
+            </div>
+
+            <button class="ui button" type="submit">Aggiungi Persona</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 package com.example.persistence.controller;
 
-import com.example.persistence.model.AddRestaurantForm;
+import com.example.persistence.dto.AddRestaurantForm;
 import com.example.persistence.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,10 +1,16 @@
 package com.example.persistence.controller;
 
+import com.example.persistence.dto.AddPersonForm;
+import com.example.persistence.dto.AddRestaurantForm;
 import com.example.persistence.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class PersonController {
@@ -15,9 +21,34 @@ public class PersonController {
     }
     private PersonService personService;
 
+    @RequestMapping("/persons/form-add")
+    public String showAddPersonForm(Model model){
+        model.addAttribute("form",new AddPersonForm());
+        return "aggiungi-persona";
+    }
+
     @RequestMapping("/persons")
     public String getAllPersons(Model model){
-        model.addAttribute("persons",personService);
-        return "ristoranti";
+        model.addAttribute("persons",personService.getAllPersons() );
+        return "persone";
+    }
+
+    /**
+     * metodo invocato alla submit della form add-person
+     * chiama il metodo per salvare l'oggetto su db
+     * @param form
+     * @return
+     */
+    @PostMapping("/persons/add")
+    public String showAddRestaurant(@Valid @ModelAttribute AddPersonForm form){
+
+        //chiamiamo il service per andare ad aggiugnere sul db il ristorante
+
+
+        personService.createPerson(form);
+
+
+
+        return "redirect:/persons";
     }
 }

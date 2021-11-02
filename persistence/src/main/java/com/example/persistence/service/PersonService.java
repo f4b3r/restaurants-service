@@ -1,6 +1,8 @@
 package com.example.persistence.service;
 
 import com.example.persistence.controller.PersonController;
+import com.example.persistence.dto.AddPersonForm;
+import com.example.persistence.dto.AddRestaurantForm;
 import com.example.persistence.model.Person;
 import com.example.persistence.model.Restaurant;
 import com.example.persistence.repository.PersonRepository;
@@ -22,4 +24,16 @@ public class PersonService {
         return  personRepository.findAll();
     }
 
+    public Person createPerson(AddPersonForm form){
+
+        Person person = new Person();
+        person.setAge(form.getAge());
+        person.setBirthDate(form.getBirthDate());
+        person.setFiscalCode(form.getFiscalCode());
+        person.setEmail(form.getEmail());
+        person.setName(form.getName());
+        person.setSurname(form.getSurname());
+
+        return personRepository.save(person);
+    }
 }

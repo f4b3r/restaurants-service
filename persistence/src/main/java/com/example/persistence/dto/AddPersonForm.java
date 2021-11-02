@@ -1,39 +1,44 @@
-package com.example.persistence.model;
+package com.example.persistence.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Entity
-public class Person {
+public class AddPersonForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    /**
+     * @NotNull campo non deve essere null
+     * @NotEmpty controllo su lista che non sia vuota
+     * @NotBlank verifica che una stringa non sia vuota ("")
+     *
+     * @Min e @Max range di numeri accettati
+     * @Pattern prende in input una regEx e la verifica
+     *
+     * @Email valida email
+     */
 
-
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String surname;
 
+    @Min(0)
+    @Max(100)
+    @NotNull
     private int age;
 
+    @Pattern(regexp = "^([A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1})$|([0-9]{11})$")
     private String fiscalCode;
 
+    @Email
     private String email;
 
+    @NotNull
     private Date birthDate;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -79,7 +84,8 @@ public class Person {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(String formDate) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.birthDate = format.parse(formDate);
     }
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+
+</head>
+<body>
+
+<div class="ui list">
+  <div class="item" th:each="person : ${persons}">
+    <i class="map marker icon"></i>
+    <div class="content">
+      <a class="header" th:text="${person.name}"></a>
+      <div class="description" th:text="${person.name}"></div>
+      <div class="description" th:text="${person.surname}"></div>
+      <div class="description" th:text="${person.age}"></div>
+      <div class="description" th:text="${person.email}"></div>
+      <div class="description" th:text="${person.birthDate}"></div>
+      <div class="description" th:text="${person.fiscalCode}"></div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+</body>
+</html>

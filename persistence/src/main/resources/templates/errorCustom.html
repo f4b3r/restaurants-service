@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Errore</title>
+</head>
+<body>
+<h1 th:text="'Si sono verificati ' +   ${errorCount} + ' errori'"></h1>
+<ul>
+    <li th:each="error :${errorList}">
+        <span th:text="${error.getField()}"></span>
+        <span th:text="${error.getDefaultMessage()}"></span>
+    </li>
+</ul>
+
+</body>
+</html>

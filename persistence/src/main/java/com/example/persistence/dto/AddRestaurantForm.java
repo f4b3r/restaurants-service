@@ -1,4 +1,4 @@
-package com.example.persistence.model;
+package com.example.persistence.dto;
 
 public class AddRestaurantForm {
 

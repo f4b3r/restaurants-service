@@ -1,6 +1,6 @@
 package com.example.persistence.service;
 
-import com.example.persistence.model.AddRestaurantForm;
+import com.example.persistence.dto.AddRestaurantForm;
 import com.example.persistence.model.Restaurant;
 import com.example.persistence.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
