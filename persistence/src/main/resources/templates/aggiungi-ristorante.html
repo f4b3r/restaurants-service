@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+  <title>Aggiungi ristorante</title>
+</head>
+<body>
+<div class="ui column doubling stackable grid container">
+  <div class="column">
+    <form class="ui form" th:action="@{/restaurants/add}" method="POST" th:object="${form}">
+      <div class="field">
+        <label for="nome">Nome del Ristorante: </label>
+        <input id="nome" type="text" th:field="*{name}" required>
+      </div>
+      <div class="field">
+        <label for="location">Location del Ristorante</label>
+        <input id="location" type="text" th:field="*{location}" required>
+      </div>
+      <div class="field">
+        <label for="description">Descrizione del Ristorante</label>
+        <textarea rows="3" id="description" th:field="*{description}" required></textarea>
+      </div>
+      <button class="ui button" type="submit">Aggiungi Ristorante</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
