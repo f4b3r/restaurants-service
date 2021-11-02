@@ -12,7 +12,22 @@
             <a class="header" th:text="${restaurant.name}"></a>
             <div class="description" th:text="${restaurant.description}"></div>
             <div class="description" th:text="${restaurant.location}"></div>
+            <span th:if="${restaurant.person == null}">
+                <form th:action="@{'/restaurants/edit/'+${restaurant.id}}" method="POST" th:object="${form}">
+                      <select class="ui dropdown" th:field="*{personID}">
+                          <option value="">Seleziona</option>
+                           <option th:each="person : ${persons}"
+                            th:text="${person.name}"
+                            th:value="${person.id}">
+                        </select>
+                               <button class="ui button" type="submit">Aggiungi proprietario</button>
+                    </form>
 
+            </span>
+            <span th:unless="${restaurant.person == null}">
+                <div class="description" th:text="${restaurant.person.name}
+                + ' ' +  ${restaurant.person.surname} "></div>
+            </span>
         </div>
 
     </div>

@@ -1,11 +1,17 @@
 package com.example.persistence.controller;
 
 import com.example.persistence.dto.AddRestaurantForm;
+import com.example.persistence.dto.EditRestaurantForm;
+import com.example.persistence.model.Person;
+import com.example.persistence.model.Restaurant;
+import com.example.persistence.service.PersonService;
 import com.example.persistence.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RestaurantController {
 
     @Autowired
-    public RestaurantController(RestaurantService restaurantService){
+    public RestaurantController(RestaurantService restaurantService,
+                                PersonService personService){
         this.restaurantService = restaurantService;
+        this.personService = personService;
     }
 
     private RestaurantService restaurantService;
+
+    private PersonService personService;
 
 
     /*
@@ -28,6 +38,9 @@ public class RestaurantController {
     @RequestMapping("/restaurants")
     public String getAllRestaurants(Model model){
         model.addAttribute("restaurants",restaurantService.getAllRestaurants() );
+        model.addAttribute("persons" , personService.getAllPersons() );
+        model.addAttribute("person" , new Person());
+        model.addAttribute("form" ,new EditRestaurantForm());
         return "ristoranti";
     }
 
@@ -42,6 +55,17 @@ public class RestaurantController {
         return "aggiungi-ristorante";
     }
 
+    @PostMapping("/restaurants/edit/{id}")
+    public String showAddRestaurant(@ModelAttribute EditRestaurantForm form,
+                                    @PathVariable(name = "id") Long restaurantId){
+        Restaurant restaurant = this.restaurantService.getRestaurant(restaurantId);
+        Person person = this.personService.getPerson(form.getPersonID());
+        person.addRestaurant(restaurant);
+          this.personService.updatePerson(person);
+        return "redirect:/restaurants";
+    }
+
+
     /**
      * metodo invocato alla submit della form add-restaurant
      * chiama il metodo per salvare l'oggetto su db
@@ -55,8 +79,6 @@ public class RestaurantController {
 
 
         restaurantService.createRestaurant(form);
-
-
 
         return "redirect:/restaurants";
     }

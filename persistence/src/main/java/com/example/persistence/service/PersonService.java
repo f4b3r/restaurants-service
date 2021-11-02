@@ -40,4 +40,8 @@ public class PersonService {
 
         return personRepository.save(person);
     }
+
+    public Person updatePerson(Person person){
+        return personRepository.save(person);
+    }
 }
