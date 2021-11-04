@@ -26,6 +26,11 @@ public class RestaurantService {
         Restaurant restaurant = new Restaurant(name, location);
         return restaurantRepository.save(restaurant);
     }
+
+    public Restaurant updateRestaurant(Restaurant restaurant) {
+
+        return restaurantRepository.save(restaurant);
+    }
     public Restaurant createRestaurant(String name, String location,String description) {
         Restaurant restaurant = new Restaurant(name, location,description);
         return restaurantRepository.save(restaurant);

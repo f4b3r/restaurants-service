@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+
+</head>
+<body>
+<div class="ui column doubling stackable grid container">
+    <div class="column">
+        <div class="ui items">
+            <div th:each="menuItem : ${menuList}" class="item">
+                <form class="ui form" th:action="@{/restaurants/menu/add}" method="POST" th:object="${form}">
+                    <div class="ui small image">
+                        <img th:src="@{/images/{image} (image=${menuItem.name} + '.jpg')}">
+                    </div>
+                    <div class="middle aligned content">
+                        <div th:text="${menuItem.getName()}" class="header">
+                            Content A
+                        </div>
+                        <div class="description">
+                            <div th:text="${menuItem.ingredientsDescription}" class="header">
+                                Content A
+                            </div>
+                        </div>
+                        <input type="hidden" th:value="${menuItem.id}" th:attr="name='idMenuItem'">
+                        <input type="hidden"  th:value="${restaurantId}" th:attr="name='idRestaurant'">
+                        <div class="extra">
+                            <div class="ui right floated button">
+                                <button type="submit">Aggiungi al menu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

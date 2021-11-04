@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="head.html">
+
+</head>
+<body>
+<h1>DETTAGLIO RISTORANTE</h1>
+<div class="ui column doubling stackable grid container">
+    <div class="column">
+
+        <div class="ui card">
+            <div class="content">
+                <div class="header" th:text="${restaurant.getName()}">Project Timeline</div>
+            </div>
+            <div class="content">
+                <h4 class="ui sub header" th:text="${restaurant.getDescription()}">Activity</h4>
+                <div class="ui small feed">
+                    <div class="event">
+                        <div class="content">
+                            <div th:text="'Email: ' + ${restaurant.getPerson().getEmail()}" class="summary">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                             <span th:unless="${restaurant.address == null}">
+                                 <div class="item" th:text="'Via: ' + ${restaurant.address.street)}"></div>
+                                 <div class="item" th:text="'Citta: ' + ${restaurant.address.city}"></div>
+                            </span>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="content">
+                            <div class="summary">
+                                <div class="item"> Menu:</div>
+
+                                <div class="ui list">
+                                    <ol>
+                                        <li th:each="menuItem : ${restaurant.getRestaurantMenu()}">
+                        <span class="item" style="color: #282828"
+                              th:text="${menuItem.getName()}"></span>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <a th:href="@{/restaurants/form-editmenu/{id}(id=${restaurant.id})}">Modifica menu</a>
+
+            </div>
+        </div>
+
+
+
+
+
+      <!--  <h1>Dettaglio Ristorante</h1>
+        <div class="ui-list">
+            <div class="item" th:text="'Nome: ' + ${restaurant.getName()}"></div>
+            <div class="item" th:text="'Descrizione: ' + ${restaurant.getDescription()}"></div>
+            <span th:if="${restaurant.person == null}">
+                <div class="item">Nessun proprietario</div>
+            </span>
+            <span th:unless="${restaurant.person == null}">
+               <div class="item" th:text="'Proprietario: ' + ${restaurant.getPerson().getName()}
+                + ' ' + ${restaurant.getPerson().getSurname()}"></div>
+            </span>
+
+            <span th:if="${restaurant.address == null}">
+                <div class="item">Aggiungi indirizzo</div>
+            </span>
+            <span th:unless="${restaurant.address == null}">
+                 <div class="item" th:text="'Via: ' + ${restaurant.address.street)}"></div>
+                 <div class="item" th:text="'Citta: ' + ${restaurant.address.city}"></div>
+            </span>
+
+            <div class="item"> Menu:</div>
+            <br>
+            <div class="ui list">
+                <ol>
+                    <li th:each="menuItem : ${restaurant.getRestaurantMenu()}">
+                        <span class="item" style="color: #282828"
+                              th:text="${menuItem.getName()} + '- Ingredienti: ' + ${menuItem.ingredientsDescription}"
+                        ></span>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <a th:href="@{/restaurants/form-editmenu/{id}(id=${restaurant.id})}">Modifica menu</a>
+    </div> -->
+</body>
+</html>

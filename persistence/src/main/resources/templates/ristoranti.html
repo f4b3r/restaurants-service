@@ -4,12 +4,51 @@
 
 </head>
 <body>
+<div class="ui list">
+<div  th:each="restaurant : ${restaurants}" class="ui card">
+    <div class="content">
+        <div th:text="${restaurant.getOpenTime()}" class="right floated meta">12:30 - 22:30</div>
+
+        <a th:href="@{/restaurant/{id}(id=${restaurant.id})}"
+                                                                               class="header" th:text="${restaurant.name}"></a>
+    </div>
+    <div class="image">
+        <img>
+    </div>
+    <div class="content">
+    <span class="right floated">
+      <i class="heart outline like icon"></i>
+      17 likes
+    </span>
+        <i class="comment icon"></i>
+
+        <div th:text="${restaurant.getComments().size()} + ' comments'" >12:30 - 22:30
+
+        </div>
+    </div>
+    <div class="extra content">
+        <div class="ui large transparent left icon input">
+            <form class="ui form" th:action="@{/restaurants/comment/add}" method="POST" th:object="${formComment}">
+            <input type="text" th:field="*{content}" placeholder="Add Comment...">
+                <input type="hidden" th:value="${restaurant.id}" th:attr="name='idRestaurant'">
+                <button type="submit" class="ui button">
+                    Add
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
 
 <div class="ui list">
     <div class="item" th:each="restaurant : ${restaurants}">
         <i class="map marker icon"></i>
         <div class="content">
-            <a class="header" th:text="${restaurant.name}"></a>
+            <a th:href="@{/restaurant/{id}(id=${restaurant.id})}"
+               class="header" th:text="${restaurant.name}"></a>
             <div class="description" th:text="${restaurant.description}"></div>
             <div class="description" th:text="${restaurant.location}"></div>
             <span th:if="${restaurant.person == null}">
@@ -26,7 +65,9 @@
             </span>
             <span th:unless="${restaurant.person == null}">
                 <div class="description" th:text="${restaurant.person.name}
-                + ' ' +  ${restaurant.person.surname} "></div>
+                + ' ' +  ${restaurant.person.surname} ">
+
+                </div>
             </span>
         </div>
 
